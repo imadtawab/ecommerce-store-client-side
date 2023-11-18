@@ -1,0 +1,52 @@
+.NavSection{
+    padding-bottom: 15px;
+    h5{
+        font-size: 11px;
+        color: #454749;
+        text-transform: uppercase;
+    }
+    ul{
+        padding-top: 15px;
+            a{
+                display: flex;
+                gap: 10px;
+                padding: 10px 0;
+                align-items: center;
+                color: #333;
+                font-size: 15px;
+                padding-left: 20px;
+                transition: background .3s;
+                border-radius: 6px;
+                --bg:#787878;
+                position: relative;
+                &:hover,&.active{
+                        background: #d3d3d3;
+                }
+                &::after,&::before{
+                    position: absolute;
+                    // z-index: -2;
+                    transform: scale(0);
+                    // opacity: 0;
+                    transition: all .3s;
+                    text-wrap: nowrap;
+                }
+                &::after{
+                    content: var(--content);
+                    color: #fff;
+                    background: var(--bg);
+                    font-size: 14px;
+                    padding: 8px 15px;
+                    border-radius: 7px;
+                    left: 77px;
+                }
+                &::before{
+                    content: "";
+                    border-width: 7px;
+                    border-style: solid;
+                    border-color: transparent var(--bg) transparent transparent;
+                    // left: 63px;
+                    left: 136px;
+                }
+            }
+    }
+}

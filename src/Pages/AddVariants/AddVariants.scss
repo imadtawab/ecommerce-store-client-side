@@ -1,0 +1,15 @@
+.AddVariants{
+    .variants{
+        display: flex;
+        flex-wrap: wrap;
+        .SectionStructure{
+            flex: 1;
+            height: fit-content;
+        }
+    }
+    .controlls{
+        margin-bottom: var(--pd);
+        display: flex;
+        justify-content: end;
+    }
+}

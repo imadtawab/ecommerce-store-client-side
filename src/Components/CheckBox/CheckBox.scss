@@ -1,0 +1,38 @@
+.CheckBox{
+    
+    display: flex;
+    gap: 5px;
+    input{
+        display: none;
+        & + label{
+            width: 22px;
+            height: 22px;
+            display: block;
+            border: 2px solid #aaa;
+            border-radius: 4px;
+            cursor: pointer;
+            color: transparent;
+            transition: all .3s;
+            transform: rotate(-90deg);
+            background-color: #fff;
+        }
+        &:checked{
+            & + label{
+            background-color: #2196f3;
+            color: #fff;
+            font-weight: bold;
+            border-color: #2196f3;
+            font-size: 16px;
+            opacity: 1;
+            transform: rotate(0);
+            }
+        }
+    }
+    .label{
+        color: initial;
+        cursor: pointer;
+        display: block;
+        width: 100%;
+    }
+ 
+  }

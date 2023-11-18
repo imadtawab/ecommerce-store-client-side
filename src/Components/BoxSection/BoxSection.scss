@@ -1,0 +1,103 @@
+.BoxSection{
+    background: #fff;
+    /* border: 2px solid #efeded; */
+    display: flex;
+    padding: 20px;
+    gap: 15px;
+    border-radius: 8px;
+    width: 238px;
+    align-items: center;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+    width: auto;
+    cursor: pointer;
+    transition: all .1s;
+    &.active{
+        transform: scale(.9);
+        box-shadow: 0px 0px 11px 3px #d9d9d9;
+        background: #d5d5d500;
+    }
+    &.statustrue{
+        .icon{
+            background: var(--status-color);
+        }
+    }
+    .icon{
+        display: grid;
+    place-content: center;
+    background: var(--main-color);
+    width: 45px;
+    border-radius: 50%;
+    height: 45px;
+    color: #fff;
+    font-size: 18px;
+    }
+    .content{
+        text-transform: capitalize;
+        h4{
+            font-weight: 500;
+            color: #1e293b;
+            margin-bottom: 2px;
+        }
+        p{
+            font-weight: bold;
+            font-size: 22px;
+            // font-family: monospace;
+            /* font-weight: bold; */
+            /* color: #1c9521; */
+            /* font-size: 16px; */
+            span{
+                font-size: 15px;
+                text-transform: uppercase;
+                margin-left: 5px;
+                /* text-transform: uppercase; */
+                /* color: initial; */
+                /* margin-left: 4px; */
+                /* font-size: 13px; */
+                
+            }
+        }
+    }
+}
+.BoxSection2{
+    background: var(--status-color);
+    display: flex;
+    padding: 20px;
+    gap: 10px;
+    border-radius: 8px;
+    align-items: center;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 21%);
+    width: auto;
+    flex-direction: column;
+    /* justify-content: center; */
+    color: #fff;
+    .icon{
+        display: grid;
+        place-content: center;
+        font-size: 30px
+    }
+    .content{
+        text-transform: capitalize;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    
+        h4{
+            font-weight: 400;
+        }
+        p{
+            font-weight: bold;
+            font-size: 22px;
+            text-align: center;
+            span{
+                font-size: 15px;
+                text-transform: uppercase;
+                margin-left: 5px;
+                /* text-transform: uppercase; */
+                /* color: initial; */
+                /* margin-left: 4px; */
+                /* font-size: 13px; */
+                
+            }
+        }
+    }
+}

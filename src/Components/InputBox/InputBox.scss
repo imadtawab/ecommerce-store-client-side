@@ -1,0 +1,58 @@
+.InputBox,.TextAreaBox,.SelectBox{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    flex: 1;
+    label{
+        color: #222;
+        .required{
+            display: inline;
+            color: red;
+            font-size: 18px;
+        }
+    }
+    &.error{
+        input,textarea,select{
+            box-shadow: 0px 0px 0px 3px #ff3935a3 !important;
+            border-color: #ef53508a;
+        } 
+    }
+    input,textarea,select{
+        outline: none;
+        border: 1px solid #c9cccf;
+        padding: 10px;
+        color: #222;
+        border-radius: 5px;
+        font-size: 15px;
+        &::placeholder{
+            color: 1px solid #c9cccf;
+        }
+        &:focus{
+            box-shadow: 0px 0px 0px 3px #458fffba;
+        }
+    }
+    .error-span{
+        color: #EF5350;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        font-weight: 600;
+        position: relative;
+        top: -5px;
+    }
+    input{
+        
+    }
+    textarea{
+      resize: vertical;
+      height: 100px;
+    }
+    select{
+        option{
+            padding: 1px;
+        }
+    }
+  }

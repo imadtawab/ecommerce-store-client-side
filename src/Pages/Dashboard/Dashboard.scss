@@ -1,0 +1,7 @@
+.Dashboard{
+    .parent-dashboard{
+        display: flex;
+        gap: var(--pd);
+        flex-wrap: wrap;
+    }
+}

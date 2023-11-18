@@ -1,0 +1,21 @@
+.VariantsTable{
+    .products-table{
+        overflow: auto;
+    }
+    .catalogue{
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        .img{
+            width: 90px;
+            height: 90px;
+            border: 2px solid #e9e9e9;
+            display: grid;
+            place-content: center;
+            background: #f3f3f3;
+            img{
+                cursor: pointer;               
+            }
+        }
+    }
+}

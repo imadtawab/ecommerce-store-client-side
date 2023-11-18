@@ -1,0 +1,30 @@
+.ClientSectionStructure{
+    padding: 60px 0 0 0;
+    > .head{
+        text-align: center;
+        padding: 0 20px;
+        h5{
+            text-transform: uppercase;
+            color: var(--main-color);
+            font-weight: 600;
+            font-size: 13px;
+        }
+        h2{
+            margin: 4px 0;
+            color: #111827;
+            font-weight: 500;
+        }
+        p{
+            padding-top: 12px;
+            max-width: 830px;
+            margin: auto;
+            line-height: 27px;
+            color: #4b5563;
+        }
+    }
+    > .content{
+        margin-top: 40px;
+        padding: 18px 40px;
+        // padding: 18px 10px;
+    }
+}

@@ -1,0 +1,46 @@
+.CategoriesSection{
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    .box-category{
+        background: #f3f4f6;
+        border-radius: 6px;
+        .parent{
+            padding: 20px;
+    display: block;
+            .head{
+                display: flex;
+    align-items: center;
+    gap: 10px;
+                svg{
+                    border-radius: 50%;
+    background: var(--main-color);
+    color: #fff;
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+                }
+                h2{
+                    color: #111827;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: capitalize;
+                }
+            }
+            .content{
+                padding-top: 10px;
+    color: #4b5563;
+                p{
+                    line-height: 26px;
+                }
+                a{
+                    color: var(--main-color);
+                    padding-top: 14px;
+                    display: flex;
+                    align-items: center;
+                    gap: 7px;
+                }
+            }
+        }
+    }
+}

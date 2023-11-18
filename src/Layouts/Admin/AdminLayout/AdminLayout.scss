@@ -1,0 +1,16 @@
+.AdminLayout{
+    display: flex;
+    .main-container{
+        flex:1;
+        transition: margin .3s;
+        max-width: 100%;
+        overflow: hidden;
+        position: relative;
+        @media (min-width: 650px) {
+            margin-left: 70px;
+            &.sideBarShow{
+                margin-left: 250px;
+            }
+        }
+    }
+}
