@@ -1,6 +1,6 @@
 import { createSlice , createAsyncThunk } from "@reduxjs/toolkit"
 import { adminAPI } from "../API/axios-global"
-
+import undefined_avatar from "../assets/undefined_avatar.png"
 export const addAuthToState = createAsyncThunk("addAuthToState",
 async (_auth, thunkAPI) => {
   const {rejectWithValue} = thunkAPI
@@ -332,6 +332,29 @@ async (items, thunkAPI) => {
     }).catch(err => rejectWithValue(err))
 })
 // CATEGORIES END
+
+export const updateProfile_settings = createAsyncThunk("updateProfile_settings" ,
+async (newProfile , thunkAPI) => {
+  const {rejectWithValue} = thunkAPI
+  return adminAPI.put("account/settings/profile/update",newProfile).then((docs) => {
+    if(!docs.data.success){
+      console.log(docs.data,'wal 3adaaaaaaaaaaaaaaaaaaaaaab');
+        return rejectWithValue({message: docs.data.error})
+      }
+    return docs.data
+}).catch(err => rejectWithValue(err))
+})
+export const updatePassword_settings = createAsyncThunk("updatePassword_settings",
+async (formObj, thunkAPI) => {
+  const {rejectWithValue} = thunkAPI
+  return adminAPI.put("account/settings/password/update",formObj).then((docs) => {
+    if(!docs.data.success){
+      console.log(docs.data,'wal 3adaaaaaaaaaaaaaaaaaaaaaab');
+        return rejectWithValue({message: docs.data.error})
+      }
+    return docs.data
+}).catch(err => rejectWithValue(err))
+})
 const initState = {user: null, shoppingCard: [],
   registerUserStatus: {isLoading: false, error:false , success:false},
   loginUserStatus: {isLoading: false, error:false , success:false},
@@ -357,6 +380,9 @@ updateCategorieStatus :{isLoading: false, error:false , success:false},
 changeCategorieVisibilityStatus :{isLoading: false, error:false , success:false},
 updateManyStatus_categories_Status:{isLoading: false , error: false , success: false},
 deleteManyStatus_categories_Status:{isLoading: false , error: false , success: false},
+
+updateProfile_settings_Status:{isLoading: false , error: false , success: false},
+updatePassword_settings_Status:{isLoading: false , error: false , success: false},
 }
 
 const usersSlice = createSlice({
@@ -374,10 +400,13 @@ const usersSlice = createSlice({
           }
         },
         [addAuthToState.fulfilled]: (state,action) => {
+          console.log(action.payload,999999996);
           state.user = {
             userName: action.payload.user.userName,
             email: action.payload.user.email,
-            token: action.payload.token
+            avatar: action.payload?.user?.avatar ? "http://localhost:3500/media/"+action.payload?.user?.avatar : undefined_avatar,
+            token: action.payload.token,
+            phone: action.payload.user.phone,
           }
           state.addAuthToStateStatus={
             ...state.addAuthToStateStatus,
@@ -393,6 +422,7 @@ const usersSlice = createSlice({
           }  
           window.location.href = "/admin/account/login"
         },
+
         // Register user
         [registerUser.pending]: (state,action) => {
           console.log(action);
@@ -419,6 +449,7 @@ const usersSlice = createSlice({
             error: action.payload.message
           }  
         },
+
         // Login user
         [loginUser.pending]: (state,action) => {
           console.log(action);
@@ -434,7 +465,9 @@ const usersSlice = createSlice({
           state.user = {
             userName: action.payload.user.userName,
             email: action.payload.user.email,
-            token: action.payload.token
+            avatar: action.payload?.user?.avatar ? "http://localhost:3500/media/"+action.payload?.user?.avatar : undefined_avatar,
+            token: action.payload.token,
+            phone: action.payload.user.phone,
           }
           state.loginUserStatus={
             ...state.loginUserStatus,
@@ -450,6 +483,7 @@ const usersSlice = createSlice({
             error: action.payload.message
           }  
         },
+
         // create attribute user
         [createAttributes.pending]: (state,action) => {
           console.log(action);
@@ -476,6 +510,7 @@ const usersSlice = createSlice({
             error: action.payload.message
           }  
         },
+
         // get Attributes
         [getAttributes.pending]: (state,action) => {
           console.log(action);
@@ -500,6 +535,7 @@ const usersSlice = createSlice({
             error: action.payload.message
           }  
         },
+
         // delete attribute
         [deleteAttribute.pending]: (state,action) => {
           console.log(action);
@@ -525,6 +561,7 @@ const usersSlice = createSlice({
             error: action.payload.message
           }  
         },
+
         // change visibility attribute
         [changeAttributeVisibility.pending]: (state,action) => {
           console.log(action);
@@ -551,6 +588,7 @@ const usersSlice = createSlice({
             error: action.payload.message
           }  
         },
+
         // update Many Status product
         [updateManyStatus_attributes.pending]: (state, action) => {
           console.log(action)
@@ -585,6 +623,7 @@ const usersSlice = createSlice({
               error: action.payload.message
           }
       },
+
       // delete Many product
       [deleteManyStatus_attributes.pending]: (state, action) => {
           console.log(action)
@@ -611,6 +650,7 @@ const usersSlice = createSlice({
               error: action.payload.message
           }
       },
+
         // update attribute
         [updateAttribute.pending]: (state,action) => {
           console.log(action);
@@ -636,6 +676,7 @@ const usersSlice = createSlice({
             error: action.payload.message
           }  
         },
+
         // ATTRIBUTES START
          // create categorie user
          [createCategories.pending]: (state,action) => {
@@ -663,6 +704,7 @@ const usersSlice = createSlice({
             error: action.payload.message
           }  
         },
+
         // get Categories
         [getCategories.pending]: (state,action) => {
           console.log(action);
@@ -687,6 +729,7 @@ const usersSlice = createSlice({
             error: action.payload.message
           }  
         },
+
         // delete categorie
         [deleteCategorie.pending]: (state,action) => {
           console.log(action);
@@ -712,6 +755,7 @@ const usersSlice = createSlice({
             error: action.payload.message
           }  
         },
+
         // change visibility categorie
         [changeCategorieVisibility.pending]: (state,action) => {
           console.log(action);
@@ -738,6 +782,7 @@ const usersSlice = createSlice({
             error: action.payload.message
           }  
         },
+
         // update Many Status product
         [updateManyStatus_categories.pending]: (state, action) => {
           console.log(action)
@@ -772,6 +817,7 @@ const usersSlice = createSlice({
               error: action.payload.message
           }
       },
+
       // delete Many product
       [deleteManyStatus_categories.pending]: (state, action) => {
           console.log(action)
@@ -798,6 +844,7 @@ const usersSlice = createSlice({
               error: action.payload.message
           }
       },
+
         // update categorie
         [updateCategorie.pending]: (state,action) => {
           console.log(action);
@@ -852,6 +899,7 @@ const usersSlice = createSlice({
             error : action.payload.message || "Failed To Add Product"
           }
         },
+
         // delete product from card
         [deleteProductFromCard.pending]: (state , action) => {
           console.log(action);
@@ -879,6 +927,7 @@ const usersSlice = createSlice({
             error : action?.payload?.message || "Failed To Delete Product"
           }
         },
+
         // changeQuantite
         [changeQuantite.pending]: (state , action) => {
           console.log(action);
@@ -905,6 +954,7 @@ const usersSlice = createSlice({
             error : action?.payload?.message || "Failed To Change Quantite"
           }
         },
+
         // get shopping card
         [getShoppingCard.pending]: (state , action) => {
           // console.log(action);
@@ -961,6 +1011,78 @@ const usersSlice = createSlice({
         [logout.fulfilled]: (state,action) => {
           state.user = null
         },
+        // update profile settings
+        [updateProfile_settings.pending]: (state,action) => {
+          console.log(action);
+          state.updateProfile_settings_Status={
+            isLoading : true,
+            error: false,
+            success: false
+          }
+        },
+        [updateProfile_settings.fulfilled]: (state,action) => {
+          // state.user = action.payload.data
+          console.log(action.payload,3333333);
+          state.updateProfile_settings_Status={
+            ...state.updateProfile_settings_Status,
+            isLoading : false,
+            success: "Profile Updated !"
+          }
+          state.user = {
+            ...state.user,
+            ...action.payload.data,
+            // userName: action.payload.user.userName,
+            // email: action.payload.user.email,
+            // token: action.payload.token,
+            // phone: action.payload.user.phone,
+          }
+          // if (action.payload.avatar !== state.user.avatar){
+          // state.user.avatar= action.payload?.data?.avatar ? "http://localhost:3500/media/"+action.payload?.user?.avatar : undefined_avatar
+          // }
+          // dont complited
+          if(action.payload.data.avatar){
+            console.log(8888888);
+            state.user.avatar= "http://localhost:3500/media/"+action.payload.data.avatar
+            return
+          }
+          if (action.payload.data.emptyAvatar) {
+            state.user.avatar= undefined_avatar
+            return
+          }
+        },
+        [updateProfile_settings.rejected]: (state,action) => {
+          console.log(action.payload, 22);
+          state.updateProfile_settings_Status={
+            ...state.updateProfile_settings_Status,
+            isLoading : false,
+            error: action.payload.message
+          }  
+        },
+                // update password settings
+                [updatePassword_settings.pending]: (state,action) => {
+                  console.log(action);
+                  state.updatePassword_settings_Status={
+                    isLoading : true,
+                    error: false,
+                    success: false
+                  }
+                },
+                [updatePassword_settings.fulfilled]: (state,action) => {
+                  console.log(action.payload, 22);
+                  state.updatePassword_settings_Status={
+                    ...state.updatePassword_settings_Status,
+                    isLoading : false,
+                    success: action.payload.success
+                  }
+                },
+                [updatePassword_settings.rejected]: (state,action) => {
+                  state.updatePassword_settings_Status={
+                    ...state.updatePassword_settings_Status,
+                    isLoading : false,
+                    error: action.payload.message
+                  }  
+                },
+
        
                 
     }

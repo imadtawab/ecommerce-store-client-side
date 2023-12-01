@@ -27,6 +27,10 @@ import AuthAdmin from './Auth/AuthAdmin';
 import {AuthProvider, RequireAuth} from 'react-auth-kit'
 import Attributes from './Pages/Attributes/Attributes';
 import Categories from './Pages/Categories/Categories';
+import Profile from './Pages/Profile/Profile';
+import Settings from './Pages/Settings/Settings';
+import Password from './Pages/Password/Password';
+import UserProfile from './Pages/UserProfile/UserProfile';
 // import {disableReactDevTools} from "@fvilers/disable-react-devtools"
 
 // if(process.env.NODE_ENV === "production") disableReactDevTools()
@@ -109,7 +113,29 @@ const routes = createBrowserRouter([
     {
       path:"categories",
       element: <Categories/>
-    }
+    },
+    {
+      path: "settings",
+      element: <Settings/>,
+      children: [
+        {
+          index: true,
+          element: <Profile/>
+        },
+        {
+          path: "profile",
+          element: <Profile/>
+        },
+        {
+          path: "password",
+          element: <Password/>
+        },
+        {
+          path: "notification",
+          element: <Profile/>
+        },
+      ]
+    },
   ]
 
 },
@@ -124,6 +150,16 @@ const routes = createBrowserRouter([
     {
       path: "register",
       element: <Register/>
+    },
+  ]
+},
+{
+  path:"/admin/account",
+  element: <AdminLayout/>,
+  children:[
+    {
+      path: "profile",
+      element: <UserProfile/>
     }
   ]
 }

@@ -54,26 +54,30 @@ export default function OrdersTracking() {
     let statusArray = ["pending","confirmed","shipped","delivered","cancelled","on_hold","delayed","returned"]
     // let orders = getOrdersStatus.success
     Object.keys(valuesForStatus).forEach((status) => {
-          if(status === "all"){
-            setValuesForStatus((prev) => {return {...prev , [status]: orders.length}})
-            return
-          }
-          if(status === "today"){
-            let startTime = new Date().setHours(0,0,0,0)
-            setValuesForStatus((prev) => {return {...prev , [status]: orders.filter(order => order.addedIn >= startTime).length}})
-          }
-          if(statusArray.indexOf(status) !== -1){
-            setValuesForStatus((prev) => {return {...prev , [status]: orders.filter(order => order.status[order.status.length - 1].name === status).length}})
-          }
+      console.log(orders.length);
+      if(status === "all"){
+        setValuesForStatus((prev) => {return {...prev , [status]: orders.length}})
+        return
+      }
+      if(status === "today"){
+        let startTime = new Date().setHours(0,0,0,0)
+        setValuesForStatus((prev) => {return {...prev , [status]: orders.filter(order => order.addedIn >= startTime).length}})
+      }
+      if(statusArray.indexOf(status) !== -1){
+        // 000
+        setValuesForStatus((prev) => {return {...prev , [status]: orders.filter(order => order.status[order.status.length - 1].name === status).length}})
+      }
+      console.log(statusArray,valuesForStatus,6633);
     })
   }
+
   useEffect(() => {
-    dispatch(getOrders()).then((docs) => {
-      if(docs.type === "getOrders/fulfilled"){
-        console.log(docs.payload);
-        valuesForStatusHandle(docs.payload.data)
-      }
-    })
+    // dispatch(getOrders()).then((docs) => {
+    //   if(docs.type === "getOrders/fulfilled"){
+    //     valuesForStatusHandle(docs.payload.data)
+    //   }
+    // })
+    dispatch(filterOrdersByStatus({status: statusChecked.status , time: statusChecked.time}))
     // boxActiveHandle(false , "all")
   }, [])
 
@@ -81,6 +85,7 @@ export default function OrdersTracking() {
     if(getOrdersStatus?.success?.subData?.length){
       valuesForStatusHandle(getOrdersStatus.success.subData)
     }
+    // if(getOrdersStatus?.success?.data?.length) valuesForStatusHandle(filterOrdersByStatus_Status.success.data)
   }, [getOrdersStatus])
 
   useEffect(() => {
@@ -88,6 +93,28 @@ export default function OrdersTracking() {
       setStatusChecked(statusSelectInFilter)
     }
   }, [statusSelectInFilter])
+  // useEffect(() => {
+  //   dispatch(getOrders()).then((docs) => {
+  //     if(docs.type === "getOrders/fulfilled"){
+  //       valuesForStatusHandle(docs.payload.data)
+  //     }
+  //   })
+  //   // boxActiveHandle(false , "all")
+  // }, [])
+
+  // useEffect(() => {
+  //   // if(getOrdersStatus?.success?.subData?.length){
+  //   //   valuesForStatusHandle(getOrdersStatus.success.subData)
+  //   // }
+  //   console.log(getOrdersStatus.success.data,"###############################");
+  //   if(getOrdersStatus?.success?.data?.length) valuesForStatusHandle(getOrdersStatus.success.data)
+  // }, [getOrdersStatus])
+
+  // useEffect(() => {
+  //   if(statusSelectInFilter?.status || statusSelectInFilter?.time){
+  //     setStatusChecked(statusSelectInFilter)
+  //   }
+  // }, [statusSelectInFilter])
   return (
     <PageStructure title={"Orders Tracking"}>
         <div className='OrdersTracking'>
@@ -106,7 +133,7 @@ export default function OrdersTracking() {
     <Loading status={getOrdersStatus}>
     {/* valuesForStatusHandle={valuesForStatusHandle} valuesForStatus={valuesForStatus} setValuesForStatus={setValuesForStatus} */}
     {console.log(getOrdersStatus.success,99999)}
-    <TableOrders boxActiveHandle={boxActiveHandle} orders={getOrdersStatus.success.data}/>
+    <TableOrders key={"tableOfOrders1112"} boxActiveHandle={boxActiveHandle} orders={getOrdersStatus.success.data}/>
         </Loading>     
 
         </div>
@@ -175,7 +202,7 @@ export default function OrdersTracking() {
 //             setValuesForStatus((prev) => {return {...prev , [status]: orders.filter(order => order.addedIn >= startTime).length}})
 //           }
 //           if(statusArray.indexOf(status) !== -1){
-//             setValuesForStatus((prev) => {return {...prev , [status]: orders.filter(order => order.status[order.status.length - 1].name === status).length}})
+//             setValuesForStatus((prev) => {return {...prev , [status]: orders.filter(order => order.current_status.name === status).length}})
 //           }
 //     })
 //   }

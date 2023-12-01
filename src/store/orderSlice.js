@@ -200,7 +200,8 @@ const ordersSlice = createSlice({
           state.filterOrdersByStatus_Status = {
             ...state.filterOrdersByStatus_Status,
             isLoading: false,
-            success : action.payload.data.data
+            success : action.payload.data
+            // success : action.payload.data.data ***
           }
           state.getOrdersStatus = {
             ...state.getOrdersStatus,
@@ -282,7 +283,7 @@ const ordersSlice = createSlice({
           }
         },
         [changeOrderStatus.fulfilled]: (state , action) => {
-          console.log(action.payload,7777);
+          // console.log(action.payload,7777);
           state.getOrderDetailsStatus = {
             ...state.getOrderDetailsStatus,
             // success : action.payload
@@ -372,6 +373,7 @@ const ordersSlice = createSlice({
           }
       },
       [updateManyStatus_orders.fulfilled]: (state, action) => {
+        console.log(state.getOrdersStatus.success.data,"before");
         state.getOrdersStatus.success.data = state.getOrdersStatus.success.data.map(order => {
           if(action.payload.data.items.indexOf(order._id) !== -1){
             return {
@@ -379,11 +381,17 @@ const ordersSlice = createSlice({
               status: [...order.status , {
                 name: action.payload.data.status,
                 addenIn: false
-              }]
+              }],
+              current_status: {
+                name: action.payload.data.status,
+                addenIn: false
+              }
             }
           }
           return order
         })
+        // state.getOrdersStatus.success.data = []
+        console.log(state.getOrdersStatus.success.data,"after");
           // state.allProducts = state.allProducts.map((prod) => {
           //     if(action.payload.data.items.indexOf(prod._id) !== -1){
           //         return {
@@ -420,7 +428,7 @@ const ordersSlice = createSlice({
           }
       },
       [deleteManyStatus_orders.fulfilled]: (state, action) => {
-        state.getOrdersStatus.success = state.getOrdersStatus.success.filter(order => action.payload.data.items.indexOf(order._id) === -1)
+        state.getOrdersStatus.success.data = state.getOrdersStatus.success.data.filter(order => action.payload.data.items.indexOf(order._id) === -1)
           console.log(action)
           state.deleteManyStatus_orders_Status = {
               ...state.deleteManyStatus_orders_Status,

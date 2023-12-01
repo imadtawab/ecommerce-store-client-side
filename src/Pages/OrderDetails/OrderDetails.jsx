@@ -104,7 +104,8 @@ export function OrderDetailsHandle({order}) {
         })
     }
         useEffect(() => {
-            let now = order.status[order.status.length - 1]?.name
+                                        // 000 
+            let now = order.current_status?.name
             let next = statusArray.indexOf(now) <= statusArray.length - 2 ? statusArray[statusArray.indexOf(now) + 1] : now
             let back = statusArray.indexOf(now) >= 1 ? statusArray[statusArray.indexOf(now) - 1] : now
             setNowStatus(now)

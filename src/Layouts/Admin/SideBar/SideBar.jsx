@@ -84,12 +84,12 @@ export default function SideBar({sideBarShow,setSideBarShow}) {
                 },
                 {
                     icon: <BsFillArchiveFill/>,
-                    href: "new-product",
+                    href: "/admin/new-product",
                     title: "New Product"
                 },
                 {
                     icon: <BsFillGiftFill/>,
-                    href: "new-coupon",
+                    href: "/admin/new-coupon",
                     title: "New Coupon"
                 },
 
@@ -97,22 +97,22 @@ export default function SideBar({sideBarShow,setSideBarShow}) {
                        <NavSection name="CATALOG" links={[
                 {
                     icon: <FaCubes/>,
-                    href: "products",
+                    href: "/admin/products",
                     title: "Products"
                 },
                 {
                     icon: <MdCategory/>,
-                    href: "categories",
+                    href: "/admin/categories",
                     title: "Categories"
                 },
                 {
                     icon: <BsFillTagFill/>,
-                    href: "collections",
+                    href: "/admin/collections",
                     title: "Collections"
                 },
                 {
                     icon: <BsHash/>,
-                    href: "attributes",
+                    href: "/admin/attributes",
                     title: "Attributes"
                 },
 
@@ -120,36 +120,36 @@ export default function SideBar({sideBarShow,setSideBarShow}) {
                                   <NavSection name="Sales" links={[
                 {
                     icon: <BsBoxFill/>,
-                    href: "orders",
+                    href: "/admin/orders",
                     title: "Orders"
                 },
                 {
                     icon: <FaSitemap/>,
-                    href: "orders-tracking",
+                    href: "/admin/orders-tracking",
                     title: "Order Tracking"
                 }
             ]} />
                                               <NavSection name="Statics" links={[
                 {
                     icon: <FaFileInvoiceDollar/>,
-                    href: "statics/revenue-statics",
+                    href: "/admin/statics/revenue-statics",
                     title: "Revenue Statics"
                 },
                 {
                     icon: <FaChartLine/>,
-                    href: "statics/orders-statics",
+                    href: "/admin/statics/orders-statics",
                     title: "Orders Statics"
                 },
                 {
                     icon: <FaChartPie/>,
-                    href: "statics/products-statics",
+                    href: "/admin/statics/products-statics",
                     title: "Products Statics"
                 }
             ]} />
-                                              <NavSection name="Promotion" links={[
+                <NavSection name="Promotion" links={[
                 {
                     icon: <BsFillGiftFill/>,
-                    href: "promotion",
+                    href: "/admin/promotion",
                     title: "Coupons"
                 }
             ]} />

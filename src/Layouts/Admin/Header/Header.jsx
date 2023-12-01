@@ -1,7 +1,6 @@
 import "./Header.scss";
 import { BiMenu , BiBell , BiCog, BiSolidCog } from 'react-icons/bi'
 import { FaArrowRightToBracket, FaUserLarge } from 'react-icons/fa6'
-import profileImg from "../../../assets/profile.jpg"
 import { NavLink } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useSignOut } from "react-auth-kit";
@@ -10,6 +9,7 @@ import { logout } from "../../../store/usersSlice";
 
 export default function Header({setSideBarShow,sideBarShow}) {
   const dispatch = useDispatch()
+  
   const {user} = useSelector(s => s.users)
   const [profileMenu, setProfileMenu] = useState(false)
   const dropdownRef = useRef(null);
@@ -43,8 +43,8 @@ export default function Header({setSideBarShow,sideBarShow}) {
             <BiBell/>
           </div>
           <div   className="profile" onClick={()=> setProfileMenu(!profileMenu)}   ref={dropdownRef}>
-            <div className="img">
-              <img src={profileImg} alt="Profile" />
+            <div style={{backgroundImage: `url(${user?.avatar})`}} className="img">
+              {/* <img src={user?.avatar} alt="" /> */}
             </div>
             <div className="info">
               <p>Admin</p>

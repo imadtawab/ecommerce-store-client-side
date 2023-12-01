@@ -32,14 +32,14 @@ export default function Orders() {
 {getOrdersStatus.error && (
         <Alert type={"danger"}>{getOrdersStatus.error}</Alert>
     )}
-    <PageStructure title="Orders" >
+    <PageStructure key={"lastDance1"} title="Orders" >
         <div className="actions-head">
         {/* <Btn element="button" onClick="" btnStyle="bg" color="danger">Delete Many</Btn>
         <Btn element="button" onClick="" btnStyle="bg" color="success"></Btn> */}
         </div>
     <div className='Orders'>
     <Loading status={getOrdersStatus}>
-    <TableOrders orders={getOrdersStatus.success.data}/>
+    <TableOrders key={"tableOfOrders0001"} orders={getOrdersStatus.success.data}/>
         </Loading>     
 
     </div>
@@ -49,14 +49,13 @@ export default function Orders() {
 }
 
 
-export function TableOrders({orders , boxActiveHandle=false}) {
-    const {changeOrderStatus_Status,deleteOrder_Status , updateManyStatus_orders_Status , deleteManyStatus_orders_Status} = useSelector(s => s.orders)
-
+export function TableOrders({orders , boxActiveHandle=false, key}) {
+    const {changeOrderStatus_Status,deleteOrder_Status , updateManyStatus_orders_Status , deleteManyStatus_orders_Status , getOrdersStatus} = useSelector(s => s.orders)
     const [itemDeletedId, setItemDeletedId] = useState([])
     const [itemsSelected , setItemsSelected] = useState([])
 
     const dispatch = useDispatch()
-    console.log(orders);
+
     const changeOrderStatusHandle = (status , orderId) => {
         dispatch(changeOrderStatus({status , orderId}))
     }
@@ -91,6 +90,7 @@ export function TableOrders({orders , boxActiveHandle=false}) {
         dispatch(updateManyStatus_orders({items: itemsSelected, status: e.target.value})).then((docs) => {
           console.log(docs);
           if(docs.type === "updateManyStatus_orders/fulfilled"){
+            console.log(getOrdersStatus.success.data,9999999999999999999999);
             let selectInputs = document.querySelectorAll(".CheckBox input[type='checkbox'][name='selectOne']")
             let selectAllInput = document.getElementById("selectAll")
     
@@ -159,13 +159,13 @@ export function TableOrders({orders , boxActiveHandle=false}) {
     
     {orders.length ? (
         <>
-    <div className="actions-head">
+    <div key={key+"test13"} className="actions-head">
         <Btn disabled={!itemsSelected.length} style={{position:"relative"}} element="button" btnStyle="bg" color="primary">
         <div className="icon"><BiEdit /></div> Update Many
-                <select onChange={(e) => UpdateManyHandle(e)} disabled={!itemsSelected.length} name="selectManyBtn" id="selectManyBtn">
-                    <option selected disabled value="">Status :</option>
-                    {["pending" , "confirmed" , "shipped" , "delivered" , "cancelled" , "on_hold" , "delayed" , "returned"].map(s => (
-                        <option value={s}>{s}</option>
+                <select value={""} onChange={(e) => UpdateManyHandle(e)} disabled={!itemsSelected.length} name="selectManyBtn" id="selectManyBtn">
+                    <option disabled value="">Status :</option>
+                    {["pending" , "confirmed" , "shipped" , "delivered" , "cancelled" , "on_hold" , "delayed" , "returned"].map((s,index) => (
+                        <option key={s+"_test1"+index} value={s}>{s}</option>
                     ))}
                 </select>
         </Btn>
@@ -173,9 +173,9 @@ export function TableOrders({orders , boxActiveHandle=false}) {
         </div>
         
         
-    <SectionStructure pd="none">
+    <SectionStructure key={key} pd="none">
         
-    <div className="TableOrders">
+    <div key={"test155"+key} className="TableOrders">
         <table>
             <thead>
                 <tr>
@@ -202,7 +202,7 @@ export function TableOrders({orders , boxActiveHandle=false}) {
             <tbody>
                 {orders.map((order,ind) => (
                     <>
-                <tr>
+                <tr key={order._id+ind+"test2"}>
                     <td>
                         <CheckBox 
                             onChange={() => selectItemHandle("selectOne")}
@@ -216,8 +216,8 @@ export function TableOrders({orders , boxActiveHandle=false}) {
     gridTemplateColumns: "repeat(auto-fit, minmax(25px, 1fr))",
     gap: "3px",
     width: "53px",}} className="images">
-                                {order.shoppingCard.map(p => (
-                            <div style={{width: order.shoppingCard.length > 1 ? "25px" : "50px",
+                                {order.shoppingCard.map((p,indexx) => (
+                            <div  key={order._id+p._id+"_test3"+indexx} style={{width: order.shoppingCard.length > 1 ? "25px" : "50px",
                                 height: order.shoppingCard.length > 1 ? "25px" : "50px",
                                 display: "grid",
                                 placeContent: "center",}} className="img">
@@ -261,11 +261,12 @@ export function TableOrders({orders , boxActiveHandle=false}) {
                         </div>
                     </td>
                     
-                    <td>
-                            <div className={"select " + order.status[order.status.length - 1].name}>
-                                <SelectBox onChange={(e) => changeOrderStatusHandle(e.target.value , order._id)} style={{margin:"0"}} name="status" id="status" >
+                    <td>    
+                            <div className={"select " + order.current_status.name}>
+                                <SelectBox value={order.status[order.status.length - 1].name} onChange={(e) => changeOrderStatusHandle(e.target.value , order._id)} style={{margin:"0"}} name="status" id="status" >
                                     {["pending" , "confirmed" , "shipped" , "delivered" , "cancelled" , "on_hold" , "delayed" , "returned"].map((opt , i) => (
-                                        <option key={boxActiveHandle ? Date.now() * i : "123456789"} selected={opt === order.status[order.status.length - 1].name} value={opt}>{opt}</option>
+                                                        //   selected={opt === order.current_status.name}                                                                                  // 000
+                                        <option key={order._id+i+opt+"test4"} value={opt}>{opt}</option>
                                     ))}
                                 </SelectBox>
                         </div>

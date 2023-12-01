@@ -1,12 +1,12 @@
 import { BsFillExclamationOctagonFill } from 'react-icons/bs'
 import './InputBox.scss'
 
-export default function InputBox({error, type, name, id, placeholder, label , value , personelInput,onChange,required}) {
+export default function InputBox({error, type, name, id, placeholder, label , value , personelInput,onChange,required , mx_width}) {
     return (
-      <div className={"InputBox" + (error ? " error" : "")}>
+      <div className={"InputBox" + (error ? " error" : "") + (mx_width ? " mx_width" : "")}>
           {label && (
             <>
-                          <label htmlFor={id}>{label}{required && <div className="required">*</div>}</label>
+                <label htmlFor={id}>{label}{required && <div className="required">*</div>}</label>
               
               </>
           )}
@@ -37,13 +37,13 @@ export default function InputBox({error, type, name, id, placeholder, label , va
       </div>
     )
   }
-  export function SelectBox({name, id, placeholder, label, children, onChange , required, style , value}) {
+  export function SelectBox({name, id, placeholder, label, children, onChange , required, style , value , defaultValue}) {
     return (
       <div style={style} className="SelectBox">
           {label && (
               <label htmlFor={id}>{label}</label>
           )}
-          <select value={value} required={required ? true : false} onChange={onChange} placeholder={placeholder} name={name} id={id}>
+          <select defaultValue={defaultValue} value={value} required={required ? true : false} onChange={onChange} placeholder={placeholder} name={name} id={id}>
             {children}
           </select>
       </div>

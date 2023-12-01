@@ -1,0 +1,53 @@
+.Profile{
+    // display: flex;
+    // gap: 20px;
+    // flex-wrap: wrap;
+    .avatar{
+        margin: auto;
+        position: relative;
+        .avatar-container{
+            // width: 200px;
+            // height: 200px;
+            // box-shadow: 0px 0px 8px 5px #939292bd;
+            // border-radius: 50%;
+            // overflow: hidden;
+
+            width: 200px;
+            height: 200px;
+            box-shadow: 0px 0px 8px 5px rgba(147, 146, 146, 0.7411764706);
+            border-radius: 50%;
+            overflow: hidden;
+            // background-image: url(var(attr(data-url)));
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            img{
+                width: inherit;
+                height: inherit;
+            }
+        }
+        .add-avatar,.delete-avatar{
+            position: absolute;
+            bottom: 40px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 30px;
+            display: grid;
+            place-content: center;
+            color: #fff;
+            box-shadow: 0px 0px 0px 3px #ffffff;
+        }
+        .add-avatar{
+            background-color: #01796F;
+            right: -12px;
+            input{
+                display: none;
+            }
+        }
+        .delete-avatar{
+            background-color: #ef4444;
+            left: -12px;
+        }
+    }
+}

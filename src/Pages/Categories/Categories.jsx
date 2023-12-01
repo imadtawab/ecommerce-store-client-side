@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { changeCategorieVisibility, createCategories, deleteCategorie, deleteManyStatus_categories, getCategories, updateCategorie, updateManyStatus_categories } from '../../store/usersSlice'
 import Alert from '../../Components/Alert/Alert'
 import EmptyErrorSection from '../../Components/EmptyErrorSection/EmptyErrorSection'
-
+import default_product_img from "../../assets/product-default.png"
 export default function Categories() {
   const {createCategoriesStatus,getCategoriesStatus,deleteCategorieStatus,changeCategorieVisibilityStatus,updateCategorieStatus , updateManyStatus_categories_Status , deleteManyStatus_categories_Status} = useSelector(s => s.users)
     const [addNewProductSection, setAddNewProductSection] = useState(false)
@@ -191,7 +191,7 @@ export default function Categories() {
                     <td>
                       <div style={{justifyContent: "center"}} className="product-name">
                         <div className="img">
-                          <img src={`http://localhost:3500/media/${catg.image}`} alt="" />
+                          <img src={catg.image ?`http://localhost:3500/media/${catg.image}` : default_product_img} alt="" />
                         </div>
                       </div>
                     </td>

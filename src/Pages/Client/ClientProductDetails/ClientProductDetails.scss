@@ -280,7 +280,8 @@
                                 padding: 0 3px;
     height: 28px;
     display: grid;
-    justify-content: center;
+    align-items: center;
+    text-align: center;
     border-radius: 5px;
     color: var(--main-color);
                                 &.active{

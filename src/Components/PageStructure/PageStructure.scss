@@ -1,6 +1,7 @@
 .PageStructure{
     min-height: calc(100vh - 72px);
-    background: #f5f5f5;
+    // background: #f5f5f5;
+    background: #f5f5f578;
     padding: var(--pd) calc(var(--pd)*2);
     .head{
         display: flex;
@@ -11,7 +12,7 @@
         gap: var(--pd);
         h1{
             text-transform: capitalize;
-            font-size: 20px;
+            font-size: 23px;
             color: #222;
         }
     }
